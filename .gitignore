@@ -67,3 +67,10 @@ packages/react-devtools-timeline/dist
 Terms
 Privacy
 Secur
+
+
+
+*.pyc
+.DS_Store
+env
+venv
