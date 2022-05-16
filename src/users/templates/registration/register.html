@@ -1,0 +1,116 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+<style type="text/css">
+  input[type="text"]:-moz-placeholder {
+      text-align: left;
+  }
+  input[type="text"]:-ms-input-placeholder {
+      text-align: left;
+  }
+  input[type="text"]::-webkit-input-placeholder {
+      text-align: left;
+  }
+  input[type="password"]:-moz-placeholder {
+      text-align: left;
+  }
+  input[type="password"]:-ms-input-placeholder {
+      text-align: left;
+  }
+  input[type="password"]::-webkit-input-placeholder {
+      text-align: left;
+  }
+  
+  </style>
+  <main>
+    <div class="container">
+      <section class="mb-4">
+        <div class="row wow fadeIn">
+          <div class='col-6 offset-3'>
+            <h1 style = "text-align: left;">{% trans "Create Account" %}</h1>
+            <p style="text-align: left;"> If you have an account please <a href="{% url 'account_login' %}">Sign Up</a>.</p>
+
+            <form id="login-form" method="post" action="{% url 'users:register' %}">
+              {% csrf_token %}
+              <div class="form-group" style="text-align: left;">
+                <label for="exampleInputEmail1">user name</label>
+                <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="User Name">
+              </div>
+              <div class="form-group" style="text-align: let;">
+                <label for="email">email</label>
+                <input type="text" name="email" class="form-control" id="email" placeholder="Email">
+              </div>
+              <div class="form-group" style="text-align: left;">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" name="password1" class="form-control" id="exampleInputPassword1" placeholder="Password">
+              </div>
+              <div class="form-group" style="text-align: left;">
+                <label for="exampleInputPassword2">Confirm Password</label>
+                <input type="password" name="password2" class="form-control" id="exampleInputPassword2" placeholder="Confirm Password">
+              </div>
+              <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
+
+              {% if form.errors %}
+                    <p style="text-align: left;" class=" label label-danger">
+                       Some fields are missing or wrong 
+                    </p>
+                {% endif %}
+
+              <input type="submit" value="Create Account" 
+              class="btn btn-primary pull-right" />
+               <input type="hidden" name="next" value="{{ next }}" />
+            </form>
+      
+          
+            <!-- <form id="login-form" method="post" 
+            action="{% url 'users:register' %}">
+                {% csrf_token %}
+            
+  
+                <table class="table">
+                    <tr>
+        
+                        <td><input id="id_username" name="username" 
+                                   type="text" class="form-control"></td>
+                        <td><label for="id_username">اسم المستخدم</label></td>
+                    </tr>
+                    
+                    <tr>
+                        <td><input id="id_email" name="email" 
+                                   type="text" class="form-control"></td>
+                        <td><label for="id_password">عنوان بريد الكتروني</label></td>
+                    </tr>
+                    <tr>
+                        
+                      <td><input id="id_password1" name="password1" 
+                                 type="password" class="form-control"></td>
+                      <td><label for="id_password">كلمة المرور</label></td>
+                  </tr>
+                  <tr>
+                        
+                      <td><input id="id_password2" name="password2" 
+                                 type="password" class="form-control"></td>
+                      <td><label for="id_password">كلمة السر مجدداً</label></td>
+                  </tr>
+                </table>
+                {% if form.errors %}
+                    <p style="text-align: right;" class=" label label-danger">
+                        بعض الحقول مفقودة أو غير صحيحة
+                    </p>
+                {% endif %}
+
+                <input type="submit" value="تسجيل الدخول" 
+                class="btn btn-primary pull-right" />
+         <input type="hidden" name="next" value="{{ next }}" />
+            </form> -->
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+{% endblock %}
