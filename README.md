@@ -2,7 +2,7 @@
 
 # Introduction
 
-The goal of this project is to provide a product Catalogue website in which a company can showcase their products
+This project is created for SEN4015 course
 
 The project is written with django 4.0.1 and python 3.8 in mind.
 
@@ -13,11 +13,10 @@ The project is written with django 4.0.1 and python 3.8 in mind.
 
 * Custom Login and Registraion
 
-* ability to add products to an Order list which can be viewed by an Admin
+* ability to add movies to a Watchlist
 
       
     
-
 
 # Getting Started
 
