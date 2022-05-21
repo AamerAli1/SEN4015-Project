@@ -22,12 +22,12 @@ The project is written with django 4.0.1 and python 3.8 in mind.
 
 First clone the repository from Github and switch to the new directory:
 
-    $ git clone git@github.com/USERNAME/{{ project_name }}.git
-    $ cd {{ project_name }}
+    $ git clone https://github.com/aameralkazemi/SEN4015-Project
+    $ cd SEN4015-Project
     
 First Install virtualenv 
 
-    $ pip3 -m venv path/to/venv
+    $ pip3 -m venv venv
     
 Activate the virtualenv for your project.
 
@@ -35,7 +35,7 @@ Activate the virtualenv for your project.
     
 Install project dependencies:
 
-    $ pip install -r requirements/local.txt
+    $ pip install -r src/requirements.txt
     
     
 Then simply apply the migrations:
