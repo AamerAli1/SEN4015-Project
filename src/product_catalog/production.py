@@ -35,12 +35,18 @@ STRIPE_SECRET_KEY = "ssas"
 INSTALLED_APPS = [
     # My Apps
     'product_catalog_app',
-    'django_crontab',
     'users',
+
+    'django_crontab',
     'django_cleanup.apps.CleanupConfig',
     'import_export',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
     'crispy_forms',
    
+
 
 
     # Django Apps
@@ -133,9 +139,9 @@ USE_TZ = True
 
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_URL = 'static/'
-STATIC_ROOT = '/django-project/site/public/static'
+STATIC_ROOT = '/home/aamer/uni/SEN4015-Project/site/public/static'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/django-project/site/public/media'
+MEDIA_ROOT = '/home/aamer/uni/SEN4015-Project/site/public/media'
 
 
 # Default primary key field type

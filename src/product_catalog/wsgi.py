@@ -11,6 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'product_catalog.production')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'product_catalog.development')
 
 application = get_wsgi_application()
