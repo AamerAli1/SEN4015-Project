@@ -39,9 +39,6 @@ INSTALLED_APPS = [
     'users',
     'django_cleanup.apps.CleanupConfig',
     'import_export',
-    'allauth',
-    'allauth.account',
-
     'crispy_forms',
    
 

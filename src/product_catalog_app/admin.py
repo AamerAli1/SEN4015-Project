@@ -2,7 +2,7 @@ from importlib.resources import read_text
 from django.contrib import admin
 from import_export.admin import ExportActionMixin
 from import_export import resources
-from .models import Item, OrderItem, Order, UserProfile, CATEGORY_CHOICES
+from .models import Movie, list, MovieList, UserProfile, CATEGORY_CHOICES
 
 from import_export.widgets import ForeignKeyWidget, ManyToManyWidget
 from import_export.fields import Field
@@ -12,40 +12,38 @@ from import_export.fields import Field
 class ItemResource(resources.ModelResource):
 
     class Meta:
-        model = Item
+        model = Movie
         fields = ('title',)
         
-class OrderItemAdmin(admin.ModelAdmin):
+class MoveListAdmin(admin.ModelAdmin):
     
-    list_display = ('id','user', 'item' , 'quantity', 'date_added')
+    list_display = ('id','user', 'movie', 'quantity', 'date_added')
 
     
 
 
 
 class OrderResource(resources.ModelResource):
-    user = Field(attribute='user', widget=ForeignKeyWidget(OrderItem, field='username'))
-    items = Field(attribute='items', widget=ManyToManyWidget(OrderItem, field='item'))
+    user = Field(attribute='user', widget=ForeignKeyWidget(list, field='username'))
+    items = Field(attribute='items', widget=ManyToManyWidget(list, field='movie'))
 
 
     class Meta:
-        model = Order
-        fields = ('user', 'items','ordered_date')
+        model = MovieList
+        fields = ('user', 'items','date_added')
 
 
 
-class OrderAdmin(ExportActionMixin, admin.ModelAdmin):
+class listAdmin(ExportActionMixin, admin.ModelAdmin):
     resource_class = OrderResource
 
     list_display = ['user',
-                    'ordered',
+                    'added'
                     ]
     list_display_links = [
         'user',
    
     ]
-    list_filter = ['ordered',
-                    ]
     search_fields = [
         'user__username',
         'ref_code'
@@ -54,15 +52,15 @@ class OrderAdmin(ExportActionMixin, admin.ModelAdmin):
 
 
 
-class ItemAdmin(ExportActionMixin, admin.ModelAdmin):
+class MovieAdmin(ExportActionMixin, admin.ModelAdmin):
     resource_class = ItemResource
 
     list_display = ('title','itemNumber', 'isActive' , 'category')
 
   
 
-admin.site.register(Item, ItemAdmin)
-admin.site.register(OrderItem,OrderItemAdmin)
+admin.site.register(Movie, MovieAdmin)
+admin.site.register(list,MoveListAdmin)
 admin.site.register(UserProfile)
 admin.site.register(CATEGORY_CHOICES)
-admin.site.register(Order, OrderAdmin)
+admin.site.register(MovieList, listAdmin)

@@ -49,17 +49,6 @@ from django_countries.fields import CountryField
 
 
 
-LABEL_CHOICES = (
-    ('P', 'primary'),
-    ('S', 'secondary'),
-    ('D', 'danger')
-)
-
-ADDRESS_CHOICES = (
-    ('B', 'Billing'),
-    ('S', 'Shipping'),
-)
-
 
 class UserProfile(models.Model):
     user = models.OneToOneField(
@@ -71,7 +60,7 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-class Item(models.Model):
+class Movie(models.Model):
     title = models.CharField(max_length=100)
     itemNumber = models.CharField(null = True, max_length=100)
     isActive = models.BooleanField(default=True)
@@ -99,40 +88,27 @@ class Item(models.Model):
         })
 
 
-class OrderItem(models.Model):
+class list(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
-    ordered = models.BooleanField(default=False)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    added = models.BooleanField(default=False)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     date_added = models.DateTimeField(auto_now_add=True, blank=True, null= True)
 
     def __str__(self):
-        return  self.item.title + " on " + self.date_added.strftime("%y/%m/%d")
-
-    def get_total_item_price(self):
-        return self.quantity * self.item.price
-
-    def get_total_discount_item_price(self):
-        return self.quantity * self.item.discount_price
-
-    def get_amount_saved(self):
-        return self.get_total_item_price() - self.get_total_discount_item_price()
-
-    def get_final_price(self):
-        if self.item.discount_price:
-            return self.get_total_discount_item_price()
-        return self.get_total_item_price()
+        return  self.movie.title + " on " + self.date_added.strftime("%y/%m/%d")
 
 
-class Order(models.Model):
+
+class MovieList(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
                              on_delete=models.CASCADE)
     ref_code = models.CharField(max_length=20, blank=True, null=True)
-    items = models.ManyToManyField(OrderItem)
+    movies = models.ManyToManyField(list)
     start_date = models.DateTimeField(auto_now_add=True)
-    ordered_date = models.DateTimeField()
-    ordered = models.BooleanField(default=False)
+    date_added = models.DateTimeField()
+    added = models.BooleanField(default=False)
 
    
    
@@ -154,7 +130,7 @@ class Order(models.Model):
 
     def get_total(self):
         total = 0
-        for order_item in self.items.all():
+        for order_item in self.movies.all():
             total += order_item.get_final_price()
         if self.coupon:
             total -= self.coupon.amount

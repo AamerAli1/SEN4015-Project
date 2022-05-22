@@ -35,12 +35,14 @@ STRIPE_SECRET_KEY = "ssas"
 INSTALLED_APPS = [
     # My Apps
     'product_catalog_app',
-    'django_crontab',
     'users',
+
+    'django_crontab',
     'django_cleanup.apps.CleanupConfig',
     'import_export',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
 
     'crispy_forms',
    
